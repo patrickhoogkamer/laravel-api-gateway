@@ -58,6 +58,10 @@ class RelayRequestService
             $options['headers']['Accept'] = $request->header('Accept');
         }
 
+        if ($request->hasHeader('Content-Type')) {
+            $options['headers']['Content-Type'] = $request->header('Content-Type');
+        }
+
         $query = $request->getQueryString();
 
         if ($query) {
@@ -69,8 +73,6 @@ class RelayRequestService
         if ($content) {
             $options['body'] = $content;
         }
-
-//        dd($options['body']);
 
         $response = $this->client->request(
             $request->method(),
